@@ -24,16 +24,16 @@ services:
 
   # 用户服务
   user-service:
-    image: liugang3639/ai-qa-user-service:latest
+    image: chl/ai-qa-user-service:latest
     # build:
     #   context: ./backend-services/user-service
     #   dockerfile: Dockerfile
     container_name: ai-qa-user-service
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      SPRING_DATASOURCE_URL: jdbc:mysql://liug-aiqasystemdb.cjkwkoiq2pgc.us-east-2.rds.amazonaws.com:3306/ai_qa_system?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-      SPRING_DATASOURCE_USERNAME: admin
-      SPRING_DATASOURCE_PASSWORD: zaq12wsx
+      SPRING_DATASOURCE_URL: jdbc:mysql://chatbox-mysql:3306/ai_qa_system?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ai_qa_system
     ports:
       - "8081:8081"
     depends_on:
@@ -49,16 +49,16 @@ services:
 
   # 问答服务
   qa-service:
-    image: liugang3639/ai-qa-qa-service:latest
+    image: chl/ai-qa-qa-service:latest
     # build:
     #   context: ./backend-services/qa-service
     #   dockerfile: Dockerfile
     container_name: ai-qa-qa-service
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      SPRING_DATASOURCE_URL: jdbc:mysql://liug-aiqasystemdb.cjkwkoiq2pgc.us-east-2.rds.amazonaws.com:3306/ai_qa_system?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-      SPRING_DATASOURCE_USERNAME: admin
-      SPRING_DATASOURCE_PASSWORD: zaq12wsx
+      SPRING_DATASOURCE_URL: jdbc:mysql://chatbox-mysql:3306/ai_qa_system?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ai_qa_system
       GEMINI_API_KEY: ${GEMINI_API_KEY:AIzaSyB5nVaGOcJYSsxwmPVe1kVYZxY2Dl504Zg}
       USER_SERVICE_URL: http://user-service:8081
     ports:
@@ -78,7 +78,7 @@ services:
 
   # API网关
   api-gateway:
-    image: liugang3639/ai-qa-api-gateway:latest
+    image: chl/ai-qa-api-gateway:latest
     # build:
     #   context: ./backend-services/api-gateway
     #   dockerfile: Dockerfile
@@ -104,7 +104,7 @@ services:
 
   # 前端应用
   frontend:
-    image: liugang3639/ai-qa-frontend:latest
+    image: chl/ai-qa-frontend:latest
     # build:
     #   context: ./frontend
     #   dockerfile: Dockerfile
