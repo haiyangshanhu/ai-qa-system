@@ -1,0 +1,45 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: qa-service
+#  cloud:
+#    nacos:
+#      server-addr: 54.219.180.170:8848
+#    loadbalancer:
+#      ribbon:
+#        enabled: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/ai_qa_system?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+logging:
+  level:
+    # 将你的FeignClient接口所在的包路径设置为DEBUG
+    # 假设 UserClient 在 com.ai.qa.qaservice.feign 包下
+    com.ai.qa.qaservice.feign: DEBUG
+
+# SpringDoc配置
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    url: /v3/api-docs
+    config-url: /v3/api-docs/swagger-config
+    disable-swagger-default-url: true
+    
+
+# Gemini API配置
+gemini:
+  api:
+    base-url: https://generativelanguage.googleapis.com/v1beta
+    key: AIzaSyB5nVaGOcJYSsxwmPVe1kVYZxY2Dl504Zg  
+    model: gemini-1.5-flash  # 免费的Gemini模型，速度快，适合对话
